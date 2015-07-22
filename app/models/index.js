@@ -8,7 +8,6 @@ fs
 	.filter(function(file) {
 		return (file.indexOf('.') !== 0) 
 			&& (file !== basename)
-			&& (file !== 'db.js') // hack, remove.
 			&& (file.split('.').pop() === 'js');
 	})
 	.forEach(function(file) {
@@ -16,11 +15,3 @@ fs
 	});
 
 module.exports = db;
-
-/*
-module.exports = {
-	assignments: require('./assignments'),
-	courses: require('./courses'),
-	students: require('./students')
-};
-*/
