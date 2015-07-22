@@ -7,7 +7,6 @@ var cors = require('./app/middleware/cors');
 var handle404 = require('./app/middleware/404');
 
 var log = require('./app/config/logging');
-var models = require('./app/models/index');
 var routes = require('./app/routes/index');
 
 var app = express();
