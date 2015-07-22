@@ -19,9 +19,11 @@ var knex = require('knex')({
 });
 var path = require('path');
 var Promise = require('bluebird');
+var mocha = require('gulp-mocha');
 
 var paths = {
-	persistence: 'persistence'
+	persistence: 'persistence',
+	unittests: './tests/unit/**/*.spec.js'
 };
 
 gulp.task('migrate:latest', function () {
@@ -64,4 +66,9 @@ gulp.task('migrate:rollback', function () {
 			console.error(err);
 			knex.destroy();
 		});
+});
+
+gulp.task('test', function () {
+	return gulp.src(paths.unittests)
+		.pipe(mocha({ reporter: 'spec' }));
 });

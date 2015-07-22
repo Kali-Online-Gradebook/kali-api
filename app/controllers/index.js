@@ -11,7 +11,7 @@ fs
 			&& (file.split('.').pop() === 'js');
 	})
 	.forEach(function(file) {
-		db[file.split('.')[0]] = require(path.join(__dirname, file));
+		controllers[file.split('.')[0]] = require(path.join(__dirname, file));
 	});
 
 module.exports = controllers;
