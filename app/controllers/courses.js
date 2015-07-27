@@ -44,17 +44,19 @@ var courses = [
 	}
 ];
 
-module.exports = {
-	getCourses: function (req, res, next) {
-		res.json(courses);
-	},
-	getCourseById: function (req, res, next) {
+module.exports = function (models) {
+	return {
+		getCourses: function (req, res, next) {
+			res.json(courses);
+		},
+		getCourseById: function (req, res, next) {
 
-	},
-	postCourse: function (req, res, next) {
+		},
+		postCourse: function (req, res, next) {
 
-	},
-	putCourseById: function (req, res, next) {
+		},
+		putCourseById: function (req, res, next) {
 
-	}
+		}
+	};
 };

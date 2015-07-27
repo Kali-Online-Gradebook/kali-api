@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('./app/middleware/cors');
 var handle404 = require('./app/middleware/404');
+var handle200 = require('./app/middleware/200');
 
 var log = require('./app/config/logging');
 var routes = require('./app/routes/index');
@@ -22,10 +23,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Set up CORS.
 app.use(cors);
 
-app.use('/', routes);
+app.use('/api/v1', routes);
 
 // catch 404 and forward to error handler
 app.use(handle404);
+
+// format 200 success.
+app.use(handle200);
 
 // error handlers
 
@@ -43,6 +47,9 @@ app.use(function (err, req, res, next) {
 	}
 
 	res.status(err.status || 500);
+
+	console.error(err);
+	console.error(err.stack);
 	res.json(response);
 });
 

@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 
+require('dotenv').load();
 var app = require('../index');
 var debug = require('debug')('kali-api:server');
 var http = require('http');
