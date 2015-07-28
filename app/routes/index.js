@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var controllers = require('../controllers')(require('kali-core'));
+var jwt = require('express-jwt');
+
+router.use(jwt({ secret: process.env.JWT_PUBLIC, algorithms: ['RS256'] }));
 
 router.route('/students')
 	.get(controllers.students.getStudents)

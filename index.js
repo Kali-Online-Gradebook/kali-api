@@ -8,7 +8,8 @@ var handle404 = require('./app/middleware/404');
 var handle200 = require('./app/middleware/200');
 
 var log = require('./app/config/logging');
-var routes = require('./app/routes/index');
+var authRoutes = require('./app/routes/auth');
+var apiRoutes = require('./app/routes/index');
 
 var app = express();
 
@@ -23,7 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Set up CORS.
 app.use(cors);
 
-app.use('/api/v1', routes);
+app.use('/auth', authRoutes);
+app.use('/api/v1', apiRoutes);
 
 // catch 404 and forward to error handler
 app.use(handle404);

@@ -1,37 +1,30 @@
-/*
 var jwt = require('jsonwebtoken');
-var User = require('kali-core').User;
-var Promise = require('bluebird');
-var bcrypt = Promise.promisifyAll(require('bcrypt'));
-*/
 
 module.exports = function (models) {
-/*
 	return {
 		login: function (req, res, next) {
 			if (!req.body.user) {
 				var err = new Error('Incorrect username or password.');
-				err.status = 400;
+				err.status = 401;
 				return next(err);
 			}   
 
-			models.users.findOne({ where: { username: req.body.user.username } })
+			models.users.checkUsername(req.body.user.username)
 				.then(function (user) {
-					console.log("MyUser", user.dataValues);
-					return models.users.checkCredentials(user.dataValues, req.body.user.password);
+					return user.checkPassword(req.body.user.password);
 				})  
 				.then(function (user) {
-					console.log("JWT USER", user);
-					res.locals.data = jwt.sign(user, process.env.JWT_PRIVATE, {
+					delete user.attributes.passhash;
+					res.locals.data = jwt.sign(user.attributes, process.env.JWT_PRIVATE, {
 						algorithm: 'RS256',
-						issuer: 'myApp',
+						issuer: 'kali',
 						expiresInMinutes: 60
 					}); 
 
 					next();
 				})  
 				.catch(function (err) {
-					console.error(err);
+					console.error(err.stack);
 					err.message = 'Incorrect username or password.';
 					err.status = 401;
 
@@ -42,5 +35,4 @@ module.exports = function (models) {
 			next();
 		}
 	};
-*/
 };
