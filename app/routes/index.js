@@ -13,4 +13,12 @@ router.route('/students/:id')
 	.get(controllers.students.getStudentById)
 	.put(controllers.students.putStudentById);
 
+router.route('/courses')
+	.get(controllers.courses.getCourses)
+	.post(controllers.courses.postCourse);
+
+router.route('/courses/:id')
+	.get(controllers.courses.getCourseById)
+	.put(controllers.courses.putCourseById);
+
 module.exports = router;

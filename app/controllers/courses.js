@@ -1,3 +1,4 @@
+/*
 var courses = [
 	{
 		id: 1,
@@ -43,20 +44,44 @@ var courses = [
 		],
 	}
 ];
+*/
 
 module.exports = function (models) {
 	return {
 		getCourses: function (req, res, next) {
-			res.json(courses);
+			models.courses.all()
+				.then(function (courses) {
+					res.locals.data = courses;
+					next();
+				})
+				.catch(next);
 		},
 		getCourseById: function (req, res, next) {
+			models.courses.get(req.params.id)
+				.then(function (course) {
+					res.locals.data = course;
 
+					next();
+				})
+				.catch(next);
 		},
 		postCourse: function (req, res, next) {
+			models.courses.add(req.body.course)
+				.then(function (course) {
+					res.locals.data = course;
 
+					next();
+				})
+				.catch(next);
 		},
 		putCourseById: function (req, res, next) {
+			models.courses.update(req.body.course, req.params.id)
+				.then(function (course) {
+					res.locals.data = course;
 
+					next();
+				})
+				.catch(next);
 		}
 	};
 };
