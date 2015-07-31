@@ -4,6 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('./app/middleware/cors');
+
 var handle404 = require('./app/middleware/404');
 var handle200 = require('./app/middleware/200');
 
