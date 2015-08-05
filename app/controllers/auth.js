@@ -12,9 +12,11 @@ module.exports = function (models) {
 			models.users.checkUsername(req.body.user.username)
 				.then(function (user) {
 					return user.checkPassword(req.body.user.password);
-				})  
+				})
 				.then(function (user) {
-					delete user.attributes.passhash;
+					return user.sanitize();
+				})
+				.then(function (user) {
 					res.locals.data = jwt.sign(user.attributes, process.env.JWT_PRIVATE, {
 						algorithm: 'RS256',
 						issuer: 'kali',

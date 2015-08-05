@@ -1,34 +1,38 @@
-var controllers = require('../../../app/controllers')();
+var Promise = require('bluebird');
+var sinon = require('sinon');
+var should = require('chai').should();
+var models = {
+	courses: {}
+};
+var controllers = require('../../../app/controllers')(models);
 
 describe('coursesController', function () {
-	var req = {};
-	var res = {
-		json: function () {}
-	};
+	var req, res;
 
-	describe.only('getCourses', function () {
-		it('should return a value', function (done) {
-			console.log('controller', controllers.students);
-			// controllers.students.getCourses(req, res);
-			// done(new Error('Not Implemented'));
-		});
+	beforeEach(function () {
+		// Reset req and res object. Refactor.
+		req = {
+			params: {},
+			body: {}
+		};
+		res = {
+			locals: {}
+		};
+	});
+
+	describe('getCourses', function () {
+		it('should run');
 	});
 
 	describe('getCourseById', function () {
-		it('should run', function (done) {
-			done(new Error('Not Implemented'));
-		});
+		it('should run');
 	});
 
 	describe('postCourse', function () {
-		it('should run', function (done) {
-			done(new Error('Not Implemented'));
-		});
+		it('should run');
 	});
 
 	describe('putCourseById', function () {
-		it('should run', function (done) {
-			done(new Error('Not Implemented'));
-		});
+		it('should run');
 	});
 });

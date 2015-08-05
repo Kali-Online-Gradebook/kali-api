@@ -6,7 +6,7 @@ var models = {
 };
 var controllers = require('../../../app/controllers')(models);
 
-describe.only('studentsController', function () {
+describe('studentsController', function () {
 	var req, res;
 
 	beforeEach(function () {

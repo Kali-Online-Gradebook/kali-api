@@ -6,6 +6,7 @@
 
 require('dotenv').load();
 var debug = require('debug')('kali-api:server');
+var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
@@ -39,7 +40,8 @@ var options = {
  * Create HTTPS server.
  */
 
-var server = https.createServer(options, app);
+// var server = https.createServer(options, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
