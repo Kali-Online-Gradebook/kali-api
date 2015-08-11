@@ -17,11 +17,18 @@ module.exports = function (models) {
 					return user.sanitize();
 				})
 				.then(function (user) {
-					res.locals.data = jwt.sign(user.attributes, process.env.JWT_PRIVATE, {
-						algorithm: 'RS256',
-						issuer: 'kali',
-						expiresInMinutes: 60
-					}); 
+					var payload = {};
+					payload.user = user.attributes;
+					payload.jti = 'somerandomstringoruuid';
+
+					res.locals.data = {
+						token: jwt.sign(payload, process.env.JWT_PRIVATE, {
+							algorithm: 'RS256',
+							issuer: 'kali',
+							expiresInMinutes: 60,
+						}),
+						key: process.env.JWT_PUBLIC
+					}; 
 
 					next();
 				})  

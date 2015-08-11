@@ -1,7 +1,11 @@
 module.exports = function (models) {
 	return {
 		getStudents: function (req, res, next) {
-			models.students.all()
+			var student = models.students.context({
+				user_id: req.user.user_id
+			});
+
+			student.all()
 				.then(function (students) {
 					res.locals.data = students;
 					next();
@@ -9,7 +13,11 @@ module.exports = function (models) {
 				.catch(next);
 		},
 		getStudentById: function (req, res, next) {
-			models.students.get(req.params.id)
+			var context = {
+				user_id: req.user.user_id
+			};
+
+			models.students.get(context, req.params.id)
 				.then(function (student) {
 					res.locals.data = student;
 
@@ -18,7 +26,11 @@ module.exports = function (models) {
 				.catch(next);
 		},
 		postStudent: function (req, res, next) {
-			models.students.add(req.body.student)
+			var context = {
+				user_id: req.user.user_id
+			};
+
+			models.students.add(context, req.body.student)
 				.then(function (student) {
 					res.locals.data = student;
 
@@ -27,7 +39,11 @@ module.exports = function (models) {
 				.catch(next);
 		},
 		putStudentById: function (req, res, next) {
-			models.students.update(req.body.student, req.params.id)
+			var context = {
+				user_id: req.user.user_id
+			};
+
+			models.students.update(context, req.body.student, req.params.id)
 				.then(function (student) {
 					res.locals.data = student;
 
